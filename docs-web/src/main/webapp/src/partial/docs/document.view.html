@@ -59,6 +59,14 @@
           <span class="fas fa-check"></span> {{ share.name ? share.name : 'shared' }}
         </button>
       </span>
+      <button class="btn btn-sm btn-info" ng-click="rate()" ng-show="userInfo.username != 'guest'">
+        <span class="fas fa-rate"></span> {{ 'rate' | translate }}
+      </button>
+      <span ng-repeat="rate in document.acls | filter: { 'type': 'RATE' }">
+        <button class="btn btn-default btn-sm" ng-click="showRate(Rate)">
+          <span class="fas fa-check"></span> {{ rate.name ? rate.name : 'rated' }}
+        </button>
+      </span>
 	  </p>
 
 	  <ul class="list-inline">

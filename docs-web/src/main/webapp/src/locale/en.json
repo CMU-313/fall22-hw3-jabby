@@ -196,6 +196,11 @@
       "title": "Share document",
       "message": "Name the sharing if you want to share multiple times the same document.",
       "submit": "Share"
+    },
+    "rate": {
+      "title": "Rate user",
+      "message": "rate the user",
+      "submit": "Rate"
     }
   },
   "file": {
