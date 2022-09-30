@@ -81,6 +81,46 @@ public class DocumentDto {
      */
     private Long updateTimestamp;
 
+    private String avg_tech;
+
+    public String getAvg_tech() {
+        return avg_tech;
+    }
+
+    public void setAvg_tech(String avg_tech) {
+        this.avg_tech = avg_tech;
+    }
+
+    private String avg_interpersonal;
+
+    public String getAvg_interpersonal() {
+        return avg_interpersonal;
+    }
+
+    public void setAvg_interpersonal(String avg_interpersonal) {
+        this.avg_interpersonal = avg_interpersonal;
+    }
+
+    private String avg_fit;
+
+    public String getAvg_fit() {
+        return avg_fit;
+    }
+
+    public void setAvg_fit(String avg_fit) {
+        this.avg_fit = avg_fit;
+    }
+
+    private Integer num_reviews;
+
+    public Integer getNum_reviews() {
+        return num_reviews;
+    }
+
+    public void setNum_reviews(Integer num_reviews) {
+        this.num_reviews = num_reviews;
+    }
+
     /**
      * Shared status.
      */
