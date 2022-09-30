@@ -118,7 +118,51 @@ public class Document implements Loggable {
      */
     @Column(name = "DOC_DELETEDATE_D")
     private Date deleteDate;
+
+    @Column(name = "DOC_AVG_TECH_C")
+    private String avg_tech;
+
+    public String getAvg_tech() {
+        return avg_tech;
+    }
+
+    public void setAvg_tech(String avg_tech) {
+        this.avg_tech = avg_tech;
+    }
+
+    @Column(name = "DOC_AVG_INTERPERSONAL_C")
+    private String avg_interpersonal;
     
+    public String getAvg_interpersonal() {
+        return avg_interpersonal;
+    }
+
+    public void setAvg_interpersonal(String avg_interpersonal) {
+        this.avg_interpersonal = avg_interpersonal;
+    }
+
+    @Column(name = "DOC_AVG_FIT_C")
+    private String avg_fit;
+
+    public String getAvg_fit() {
+        return avg_fit;
+    }
+
+    public void setAvg_fit(String avg_fit) {
+        this.avg_fit = avg_fit;
+    }
+
+    @Column(name = "DOC_NUM_REVIEWS_N")
+    private Integer num_reviews;
+    
+    public Integer getNum_reviews() {
+        return num_reviews;
+    }
+
+    public void setNum_reviews(Integer num_reviews) {
+        this.num_reviews = num_reviews;
+    }
+
     public String getId() {
         return id;
     }
