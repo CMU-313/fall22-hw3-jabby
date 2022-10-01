@@ -122,44 +122,44 @@ public class Document implements Loggable {
     @Column(name = "DOC_AVG_TECH_C")
     private String avg_tech;
 
-    public String getAvg_tech() {
+    public String getAvgTech() {
         return avg_tech;
     }
 
-    public void setAvg_tech(String avg_tech) {
+    public void setAvgTech(String avg_tech) {
         this.avg_tech = avg_tech;
     }
 
     @Column(name = "DOC_AVG_INTERPERSONAL_C")
     private String avg_interpersonal;
     
-    public String getAvg_interpersonal() {
+    public String getAvgInterpersonal() {
         return avg_interpersonal;
     }
 
-    public void setAvg_interpersonal(String avg_interpersonal) {
+    public void setAvgInterpersonal(String avg_interpersonal) {
         this.avg_interpersonal = avg_interpersonal;
     }
 
     @Column(name = "DOC_AVG_FIT_C")
     private String avg_fit;
 
-    public String getAvg_fit() {
+    public String getAvgFit() {
         return avg_fit;
     }
 
-    public void setAvg_fit(String avg_fit) {
+    public void setAvgFit(String avg_fit) {
         this.avg_fit = avg_fit;
     }
 
     @Column(name = "DOC_NUM_REVIEWS_N")
     private Integer num_reviews;
     
-    public Integer getNum_reviews() {
+    public Integer getNumReviews() {
         return num_reviews;
     }
 
-    public void setNum_reviews(Integer num_reviews) {
+    public void setNumReviews(Integer num_reviews) {
         this.num_reviews = num_reviews;
     }
 

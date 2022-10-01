@@ -121,10 +121,10 @@ public class DocumentDao {
         documentDto.setCreateTimestamp(((Timestamp) o[i++]).getTime());
         documentDto.setUpdateTimestamp(((Timestamp) o[i++]).getTime());
         documentDto.setLanguage((String) o[i++]);
-        documentDto.setAvg_tech((String) o[i++]);
-        documentDto.setAvg_interpersonal((String) o[i++]);
-        documentDto.setAvg_fit((String) o[i++]);
-        documentDto.setNum_reviews((Integer) o[i++]);
+        documentDto.setAvgTech((String) o[i++]);
+        documentDto.setAvgInterpersonal((String) o[i++]);
+        documentDto.setAvgFit((String) o[i++]);
+        documentDto.setNumReviews((Integer) o[i++]);
         documentDto.setShared(((Number) o[i++]).intValue() > 0);
         documentDto.setFileCount(((Number) o[i++]).intValue());
         documentDto.setCreator((String) o[i]);
