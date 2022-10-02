@@ -38,10 +38,10 @@ public class TestJpa extends BaseTransactionalTest {
         document.setCreateDate(new Date());
         document.setLanguage("english");
         document.setUserId(id);
-        document.setAvg_tech("10");
-        document.setAvg_interpersonal("9");
-        document.setAvg_fit("8");
-        document.setNum_reviews(0);
+        document.setAvgTech("10");
+        document.setAvgInterpersonal("9");
+        document.setAvgFit("8");
+        document.setNumReviews(0);
         documentDao.create(document, id);
         
         TransactionUtil.commit();
@@ -53,10 +53,10 @@ public class TestJpa extends BaseTransactionalTest {
 
         // Search a document by user ID
         Assert.assertNotNull(document);
-        Assert.assertEquals("10", document.getAvg_tech());
-        Assert.assertEquals("9", document.getAvg_interpersonal());
-        Assert.assertEquals("8", document.getAvg_fit());
-        Assert.assertTrue(0 == document.getNum_reviews());
+        Assert.assertEquals("10", document.getAvgTech());
+        Assert.assertEquals("9", document.getAvgInterpersonal());
+        Assert.assertEquals("8", document.getAvgFit());
+        Assert.assertTrue(0 == document.getNumReviews());
 
         // Authenticate using the database
         Assert.assertNotNull(new InternalAuthenticationHandler().authenticate("username", "12345678"));
