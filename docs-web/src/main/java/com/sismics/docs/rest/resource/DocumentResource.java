@@ -675,7 +675,7 @@ public class DocumentResource extends BaseResource {
     private float getRunningAverage(int newNum, float prevAverage, int count) {
         return prevAverage + (newNum - prevAverage) / count;
     }
-    
+
     /**
      * Saves ratings for a document. 
      * @api {put} /document/:id/rate/ 
@@ -734,6 +734,10 @@ public class DocumentResource extends BaseResource {
                 previousReviews);
 
                 documentDto.setAvgInterpersonal(Float.toString(newAverageInterpersonal));
+
+                Document document = documentDao.getById(documentId);
+                // assume that logged in user is the one rating the document
+                documentDao.update(document, principal.getId());
 
             } catch (NumberFormatException e) {
                 // return error message if issue with parsing occurs
