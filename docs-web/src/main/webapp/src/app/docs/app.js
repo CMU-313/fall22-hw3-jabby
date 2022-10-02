@@ -355,6 +355,15 @@ angular.module('docs',
         }
       }
     })
+    .state('document.view.analytics', {
+      url: '/analytics',
+      views: {
+        'tab': {
+          templateUrl: 'partial/docs/document.view.analytics.html',
+          controller: 'DocumentViewAnalytics'
+        }
+      }
+    })
     .state('login', {
       url: '/login?redirectState&redirectParams',
       views: {
