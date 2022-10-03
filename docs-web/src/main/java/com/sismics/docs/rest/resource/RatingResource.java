@@ -52,44 +52,36 @@ public class RatingResource extends BaseResource {
 		}
 
 		int previousReviews = document.getNumReviews();
-		System.out.println("got num reviews");
 		try {
 			// assumes that ratings are inputted as integers 
 			int convertedFitRating = Integer.parseInt(fitRating);
 			int convertedTechRating = Integer.parseInt(techRating);
 			int convertedInterpersonalRating = Integer.parseInt(interpersonalRating);
-			System.out.println("parsed inputs");
+
 			document.setNumReviews(previousReviews + 1);
-			System.out.println("set new num reviews");
+
 			float newAverageFit = getRunningAverage(convertedFitRating, 
 													Float.parseFloat(document.getAvgFit()), 
 													previousReviews + 1);
-			System.out.println("got new average fit");
-			System.out.println(newAverageFit);
 			document.setAvgFit(Float.toString(newAverageFit));
-			System.out.println("set new avg fit");
+
 			float newAverageTech = getRunningAverage(convertedTechRating, 
 			Float.parseFloat(document.getAvgTech()), 
 			previousReviews + 1);
-			System.out.println("got new avg tech");
-			System.out.println(newAverageTech);
 			document.setAvgTech(Float.toString(newAverageTech));
-			System.out.println("set new avg tech");
 
 			float newAverageInterpersonal = getRunningAverage(convertedInterpersonalRating, 
 			Float.parseFloat(document.getAvgInterpersonal()), 
 			previousReviews + 1);
-			System.out.println("got new avg inter");
 			document.setAvgInterpersonal(Float.toString(newAverageInterpersonal));
-			System.out.println("set new avg inter");
+
 			// assume that logged in user is the one rating the document
 			documentDao.update(document, principal.getId());
-			System.out.println("updated document");
 		} catch (NumberFormatException e) {
 			// return error message if issue with parsing occurs
 			Response.serverError().entity(e.getMessage()).build();
 		}
-		System.out.println("finished try");
+
 		// return OK if successfully saved 
 		JsonObjectBuilder response = Json.createObjectBuilder()
 				.add("status", "ok");
