@@ -41,6 +41,7 @@
     <string name="error_loading_files">Error loading files</string>
     <string name="new_document">New document</string>
     <string name="share">Sharing</string>
+    <string name="rate">Rating</string>
     <string name="close">Close</string>
     <string name="add">Add</string>
     <string name="add_share_hint">Name the share (optional)</string>
