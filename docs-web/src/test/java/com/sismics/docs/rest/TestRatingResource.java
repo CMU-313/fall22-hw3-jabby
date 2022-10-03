@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class TestRatingResource extends BaseJerseyTest{
+public class TestRatingResource extends BaseJerseyTest {
 	/**
 	 * Tests whether a document correctly stores the ratings of a single user
 	 */
@@ -55,15 +55,6 @@ public class TestRatingResource extends BaseJerseyTest{
 			.param("create_date", Long.toString(create1Date))), JsonObject.class);
 		String document1Id = json.getString("id");
 
-		// Search documents by query
-		json = target().path("/rate")
-						.request()
-						.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken)
-						.get(JsonObject.class);
-		String status = json.getString("status");
-
-		Assert.assertEquals("ok", status);
-
 		json = target().path("/rate").request()
 		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken)
 		.put(Entity.form(new Form()
@@ -71,19 +62,19 @@ public class TestRatingResource extends BaseJerseyTest{
 			.param("tech_rating", "2")
 			.param("interpersonal_rating", "1")
 			.param("fit_rating", "3")), JsonObject.class);
-		//String status = json.getString("status");
+		String status = json.getString("status");
 
 		Assert.assertEquals("ok", status);
 
+		// Get document 1
+		json = target().path("/document/" + document1Id).request()
+						.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken)
+						.get(JsonObject.class);
 
-		DocumentDao documentDao = new DocumentDao();
-		// targetId list not necessary 
-		DocumentDto documentDto = documentDao.getDocument(document1Id, PermType.READ, new ArrayList<String>());
-
-		Assert.assertEquals("2", documentDto.getAvgTech());
-		Assert.assertEquals("1", documentDto.getAvgInterpersonal());
-		Assert.assertEquals("3", documentDto.getAvgFit());
-		Assert.assertTrue(1 == documentDto.getNumReviews());
+		Assert.assertEquals("2.0", json.getString("tech_rating"));
+		Assert.assertEquals("1.0", json.getString("interpersonal_rating"));
+		Assert.assertEquals("3.0", json.getString("fit_rating"));
+		Assert.assertEquals("1", json.getString("num_reviews"));
 	}
 	/**
 	 * Tests whether a document correctly stores running average of ratings

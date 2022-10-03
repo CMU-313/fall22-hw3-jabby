@@ -13,7 +13,6 @@ import javax.json.JsonObjectBuilder;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.util.*;
 
 @Path("/rate")
 public class RatingResource extends BaseResource {
@@ -23,13 +22,6 @@ public class RatingResource extends BaseResource {
 			return prevAverage + (newNum - prevAverage) / count;
 	}
 
-	@GET
-	public Response test() {
-		// return OK if successfully saved 
-		JsonObjectBuilder response = Json.createObjectBuilder()
-				.add("status", "ok");
-		return Response.ok().entity(response.build()).build();
-	}
 	/**
 	 * Saves ratings for a document. 
 	 * @api {put} /rate
@@ -54,49 +46,50 @@ public class RatingResource extends BaseResource {
 
 		DocumentDao documentDao = new DocumentDao();
 		// targetId list not necessary 
-		DocumentDto documentDto = documentDao.getDocument(documentId, PermType.READ, new ArrayList<String>());
-		if (documentDto == null) {
+		Document document = documentDao.getById(documentId);
+		if (document == null) {
 			throw new NotFoundException();
 		}
 
-		int previousReviews = documentDto.getNumReviews();
-
+		int previousReviews = document.getNumReviews();
+		System.out.println("got num reviews");
 		try {
 			// assumes that ratings are inputted as integers 
 			int convertedFitRating = Integer.parseInt(fitRating);
 			int convertedTechRating = Integer.parseInt(techRating);
 			int convertedInterpersonalRating = Integer.parseInt(interpersonalRating);
-
-			documentDto.setNumReviews(previousReviews + 1);
-
+			System.out.println("parsed inputs");
+			document.setNumReviews(previousReviews + 1);
+			System.out.println("set new num reviews");
 			float newAverageFit = getRunningAverage(convertedFitRating, 
-													Float.parseFloat(documentDto.getAvgFit()), 
-													previousReviews);
-
-			documentDto.setAvgFit(Float.toString(newAverageFit));
-
+													Float.parseFloat(document.getAvgFit()), 
+													previousReviews + 1);
+			System.out.println("got new average fit");
+			System.out.println(newAverageFit);
+			document.setAvgFit(Float.toString(newAverageFit));
+			System.out.println("set new avg fit");
 			float newAverageTech = getRunningAverage(convertedTechRating, 
-			Float.parseFloat(documentDto.getAvgTech()), 
-			previousReviews);
-
-			documentDto.setAvgTech(Float.toString(newAverageTech));
-
+			Float.parseFloat(document.getAvgTech()), 
+			previousReviews + 1);
+			System.out.println("got new avg tech");
+			System.out.println(newAverageTech);
+			document.setAvgTech(Float.toString(newAverageTech));
+			System.out.println("set new avg tech");
 
 			float newAverageInterpersonal = getRunningAverage(convertedInterpersonalRating, 
-			Float.parseFloat(documentDto.getAvgInterpersonal()), 
-			previousReviews);
-
-			documentDto.setAvgInterpersonal(Float.toString(newAverageInterpersonal));
-
-			Document document = documentDao.getById(documentId);
+			Float.parseFloat(document.getAvgInterpersonal()), 
+			previousReviews + 1);
+			System.out.println("got new avg inter");
+			document.setAvgInterpersonal(Float.toString(newAverageInterpersonal));
+			System.out.println("set new avg inter");
 			// assume that logged in user is the one rating the document
 			documentDao.update(document, principal.getId());
-
+			System.out.println("updated document");
 		} catch (NumberFormatException e) {
 			// return error message if issue with parsing occurs
 			Response.serverError().entity(e.getMessage()).build();
 		}
-
+		System.out.println("finished try");
 		// return OK if successfully saved 
 		JsonObjectBuilder response = Json.createObjectBuilder()
 				.add("status", "ok");
