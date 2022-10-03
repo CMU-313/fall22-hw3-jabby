@@ -148,6 +148,12 @@
       "activity": {
         "activity": "Activity",
         "message": "Every actions on this document are logged here."
+      },
+      "analytics": {
+        "analytics": "Analytics",
+        "message": "Summary of reviewers' scores are listed here.",
+        "no_reviewers": "Number of Reviewers",
+        "avg_scores": "Scores by Category"
       }
     },
     "edit": {
