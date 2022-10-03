@@ -221,6 +221,10 @@ public class DocumentDao {
         documentDb.setLanguage(document.getLanguage());
         documentDb.setFileId(document.getFileId());
         documentDb.setUpdateDate(new Date());
+        documentDb.setAvgFit(document.getAvgFit());
+        documentDb.setAvgInterpersonal(document.getAvgInterpersonal());
+        documentDb.setAvgTech(document.getAvgTech());
+        documentDb.setNumReviews(document.getNumReviews());
         
         // Create audit log
         AuditLogUtil.create(documentDb, AuditLogType.UPDATE, userId);
