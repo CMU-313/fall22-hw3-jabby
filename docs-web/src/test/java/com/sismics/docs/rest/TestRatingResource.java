@@ -54,7 +54,16 @@ public class TestRatingResource extends BaseJerseyTest{
 			.param("language", "eng")
 			.param("create_date", Long.toString(create1Date))), JsonObject.class);
 		String document1Id = json.getString("id");
-		System.out.println(document1Id);
+
+		// Search documents by query
+		json = target().path("/rate")
+						.request()
+						.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken)
+						.get(JsonObject.class);
+		String status = json.getString("status");
+
+		Assert.assertEquals("ok", status);
+
 		json = target().path("/rate").request()
 		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken)
 		.put(Entity.form(new Form()
@@ -62,7 +71,7 @@ public class TestRatingResource extends BaseJerseyTest{
 			.param("tech_rating", "2")
 			.param("interpersonal_rating", "1")
 			.param("fit_rating", "3")), JsonObject.class);
-		String status = json.getString("status");
+		//String status = json.getString("status");
 
 		Assert.assertEquals("ok", status);
 

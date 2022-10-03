@@ -18,14 +18,21 @@ import java.util.*;
 @Path("/rate")
 public class RatingResource extends BaseResource {
 
-    // Returns the new average after adding newNum 
-    private float getRunningAverage(int newNum, float prevAverage, int count) {
-        return prevAverage + (newNum - prevAverage) / count;
-    }
+	// Returns the new average after adding newNum 
+	private float getRunningAverage(int newNum, float prevAverage, int count) {
+			return prevAverage + (newNum - prevAverage) / count;
+	}
 
+	@GET
+	public Response test() {
+		// return OK if successfully saved 
+		JsonObjectBuilder response = Json.createObjectBuilder()
+				.add("status", "ok");
+		return Response.ok().entity(response.build()).build();
+	}
 	/**
 	 * Saves ratings for a document. 
-	 * @api {post} /rate
+	 * @api {put} /rate
 	 * @apiName addRating
 	 * @apiGroup Document
 	 * @apiParam {String} id Document ID
