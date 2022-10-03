@@ -77,7 +77,7 @@ public class RatingResource extends BaseResource {
 
 			// assume that logged in user is the one rating the document
 			documentDao.update(document, principal.getId());
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			// return error message if issue with parsing occurs
 			Response.serverError().entity(e.getMessage()).build();
 		}

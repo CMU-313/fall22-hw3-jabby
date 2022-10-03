@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import javax.json.JsonArray;
 import javax.json.JsonObject;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Form;
 import javax.ws.rs.core.MediaType;
@@ -172,17 +173,22 @@ public class TestRatingResource extends BaseJerseyTest {
 		Assert.assertTrue(Float.parseFloat(json.getString("fit_rating")) == (float)(2 + 1 + 3) / 3);
 	}
 
-	/**
-	 * Tests whether invalid ratings correctly return a server error
-	 */
-	@Test
-	public void testRateInvalidRating() throws Exception {
-
-	}
-
 	@Test
 	public void testRateDocumentNotFound() throws Exception {
+		// Login user1
+		clientUtil.createUser("user5");
+		String userToken5 = clientUtil.login("user5");
+		try {
+			target().path("/rate").request()
+			.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken5)
+			.put(Entity.form(new Form()
+				.param("id", "non-existent")
+				.param("tech_rating", "2")
+				.param("interpersonal_rating", "1")
+				.param("fit_rating", "3")), JsonObject.class);
+			Assert.fail("no exception thrown when document does not exist");
+		} catch (NotFoundException e) {
 
+		}
 	}
-
 }
