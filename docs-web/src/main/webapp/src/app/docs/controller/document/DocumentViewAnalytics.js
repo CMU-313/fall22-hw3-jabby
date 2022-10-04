@@ -7,33 +7,30 @@ angular.module('docs').controller('DocumentViewAnalytics', function ($scope, $st
     /**
      * Get ratings and reviewer count from server
      */
-    console.log($stateParams)
-    Restangular.one('file/list').get({ id: $stateParams.id }).then(function(data) {
-        $scope.files = data.files;
-    });
+    // console.log($stateParams)
+    // Restangular.one('file/list').get({ id: $stateParams.id }).then(function(data) {
+    //     $scope.num_reviews = data.???;
+    //     $scope.avg_ratings = data.???;
+    // });
+    $scope.num_reviews = 4
+    $scope.avg_ratings = [8.8, 2.3, 5.0]
 
     /**
      * Style the rating scores
      * Copied from https://codepen.io/leandroamato/pen/jOWqrGe
      */
-    // Find all rating items
-    const ratings = document.querySelectorAll(".rating");
-
     // Iterate over all rating items
-    ratings.forEach((rating) => {
+    const ratings = document.querySelectorAll(".rating");
+    ratings.forEach((rating, i) => {
         // Get content and get score as a float
-        const ratingScore = parseFloat(rating.innerHTML, 10).toFixed(1);
+        const ratingScore = parseFloat($scope.avg_ratings[i], 10).toFixed(1);
 
-        // Define if the score is good, meh, or bad according to its value
+        // Define if the score is good, meh, or bad, then add score class
         const scoreClass = ratingScore < 4.0 ? "bad" : ratingScore < 7.0 ? "meh" : "good";
-
-        // Add score class to the rating
         rating.classList.add(scoreClass);
 
-        // After adding the class, get its color
+        // After adding the class, get its color to define the background gradient
         const ratingColor = window.getComputedStyle(rating).backgroundColor;
-
-        // Define the background gradient according to the score and color
         const gradient = `background: conic-gradient(${ratingColor} ${ratingScore * 10}%, transparent 0 100%)`;
 
         // Set the gradient as the rating background
