@@ -15,6 +15,7 @@
     --background-color: #e7f2fa;
     --rating-color-default: #2980b9;
     --rating-color-background: #c7e1f3;
+    --rating-color-nan: #000000;
     --rating-color-good: #27ae60;
     --rating-color-meh: #f1c40f;
     --rating-color-bad: #e74c3c;
@@ -80,16 +81,18 @@
 }
 
 /* Classes to give different colors to ratings, based on their score */
+.rating.nan {
+    background: var(--rating-color-nan);
+    color: var(--rating-color-nan);
+}
 .rating.good {
     background: var(--rating-color-good);
     color: var(--rating-color-good);
 }
-
 .rating.meh {
     background: var(--rating-color-meh);
     color: var(--rating-color-meh);
 }
-
 .rating.bad {
     background: var(--rating-color-bad);
     color: var(--rating-color-bad);

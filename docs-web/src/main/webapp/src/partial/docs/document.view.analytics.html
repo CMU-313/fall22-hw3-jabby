@@ -2,28 +2,19 @@
 
 <div class="well">
     
-    <h3>{{ 'document.view.analytics.no_reviewers' | translate }}</h3>
-    <p> {{num_reviews}} reviewers </p>
+    <h3>{{ 'document.view.analytics.no_reviewers' | translate }}: {{num_reviews}}</h3>
 
     <h3>{{ 'document.view.analytics.avg_scores' | translate }}</h3>
-    <div style="width: 100%">
-        <div class="col-md-4 flex-container">
-            <div class="rating"> {{avg_ratings[0]}} </div>
-        </div>
-        <div class="col-md-4 flex-container">
-            <div class="rating"> {{avg_ratings[1]}} </div>
-        </div>
-        <div class="col-md-4 flex-container">
-            <div class="rating"> {{avg_ratings[2]}} </div>
-        </div>
-        <div class="col-md-4 text-center"> Technical skills </div>
-        <div class="col-md-4 text-center"> Interpersonal Skills </div>
-        <div class="col-md-4 text-center"> Overall Fit </div>
+    <div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.technical_label' | translate }}</h4>
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.interpersonal_label' | translate }}</h4>
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.overall_label' | translate }}</h4>
     </div>
 
-    <p>&nbsp</p>
-    
-    
-    
+    <p>&nbsp</p> <!-- empty space purely to set outer <div> size -->
 
 </div>
