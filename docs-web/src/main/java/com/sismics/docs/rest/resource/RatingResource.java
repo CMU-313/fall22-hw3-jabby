@@ -12,6 +12,7 @@ import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Path("/rate")
@@ -87,70 +88,77 @@ public class RatingResource extends BaseResource {
 				.add("status", "ok");
 		return Response.ok().entity(response.build()).build();
 	}
+	// @GET
+	// @Path("{documentId: [a-z0-9\\-]+}")
+	// public Response tech(
+	// 	@PathParam("id") String documentId
+	// ){
+	// 	if (!authenticate()) {
+	// 		throw new ForbiddenClientException();
+	// 	}
+	// 	JsonObjectBuilder response = Json.createObjectBuilder();
+
+	// 	DocumentDao documentDao = new DocumentDao();
+	// 	Document document = documentDao.getById(documentId);
+
+	// 	if (document == null) {
+	// 		throw new NotFoundException();
+	// 	}
+	// 	String techRating = document.getAvgTech();
+
+	// 	response.add("avg_tech_rating", techRating);
+	// 	return Response.ok().entity(response.build()).build();
+	// }	
+	// @GET
+	// @Path("{documentId: [a-z0-9\\-]+}")
+	// public Response fit(
+	// 	@PathParam("id") String documentId
+	// ){
+	// 	if (!authenticate()) {
+	// 		throw new ForbiddenClientException();
+	// 	}
+	// 	JsonObjectBuilder response = Json.createObjectBuilder();
+
+	// 	DocumentDao documentDao = new DocumentDao();
+	// 	Document document = documentDao.getById(documentId);
+
+	// 	if (document == null) {
+	// 		throw new NotFoundException();
+	// 	}
+	// 	String fitRating = document.getAvgFit();
+
+	// 	response.add("avg_fit_rating", fitRating);
+	// 	return Response.ok().entity(response.build()).build();
+	// }	
+	// @GET
+	// @Path("{documentId: [a-z0-9\\-]+}")
+	// public Response interpersonal(
+	// 	@PathParam("id") String documentId
+	// ){
+	// 	if (!authenticate()) {
+	// 		throw new ForbiddenClientException();
+	// 	}
+	// 	JsonObjectBuilder response = Json.createObjectBuilder();
+
+	// 	DocumentDao documentDao = new DocumentDao();
+	// 	Document document = documentDao.getById(documentId);
+
+	// 	if (document == null) {
+	// 		throw new NotFoundException();
+	// 	}
+	// 	String interpersonalRating = document.getAvgInterpersonal();
+
+	// 	response.add("avg_interpersonal_rating", interpersonalRating);
+	// 	return Response.ok().entity(response.build()).build();
+	// }
+
 	@GET
-	public Response tech(
-		@FormParam("id") String documentId
-	){
-		if (!authenticate()) {
-			throw new ForbiddenClientException();
-		}
-		JsonObjectBuilder response = Json.createObjectBuilder();
-
-		DocumentDao documentDao = new DocumentDao();
-		Document document = documentDao.getById(documentId);
-
-		if (document == null) {
-			throw new NotFoundException();
-		}
-		String techRating = document.getAvgTech();
-
-		response.add("avg_tech_rating", techRating);
-		return Response.ok().entity(response.build()).build();
-	}	
-	@GET
-	public Response fit(
-		@FormParam("id") String documentId
-	){
-		if (!authenticate()) {
-			throw new ForbiddenClientException();
-		}
-		JsonObjectBuilder response = Json.createObjectBuilder();
-
-		DocumentDao documentDao = new DocumentDao();
-		Document document = documentDao.getById(documentId);
-
-		if (document == null) {
-			throw new NotFoundException();
-		}
-		String fitRating = document.getAvgFit();
-
-		response.add("avg_fit_rating", fitRating);
-		return Response.ok().entity(response.build()).build();
-	}	
-	@GET
-	public Response interpersonal(
-		@FormParam("id") String documentId
-	){
-		if (!authenticate()) {
-			throw new ForbiddenClientException();
-		}
-		JsonObjectBuilder response = Json.createObjectBuilder();
-
-		DocumentDao documentDao = new DocumentDao();
-		Document document = documentDao.getById(documentId);
-
-		if (document == null) {
-			throw new NotFoundException();
-		}
-		String interpersonalRating = document.getAvgInterpersonal();
-
-		response.add("avg_interpersonal_rating", interpersonalRating);
-		return Response.ok().entity(response.build()).build();
-	}
-	@GET
+	@Path("{id: [a-z0-9\\-]+}")
+	// @Produces(MediaType.APPLICATION_JSON)
 	public Response percentRating(
-		@FormParam("id") String documentId
+		@PathParam("id") String documentId
 	){
+		System.out.println("rating GET APi");
 		if (!authenticate()) {
 			throw new ForbiddenClientException();
 		}
@@ -162,6 +170,7 @@ public class RatingResource extends BaseResource {
 		UserDao userDao = new UserDao();
 
 		if (document == null) {
+			System.out.println("not found");
 			throw new NotFoundException();
 		}
 

@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.json.JsonArray;
+import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Entity;
@@ -190,5 +191,38 @@ public class TestRatingResource extends BaseJerseyTest {
 		} catch (NotFoundException e) {
 
 		}
+	}
+
+	@Test
+	public void testPercentRating() throws Exception {
+		clientUtil.createUser("user6");
+        String userToken6 = clientUtil.login("user6");
+
+        // Create a document with document1
+		long create1Date = new Date().getTime();
+		JsonObject json = target().path("/document").request()
+			.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+			.put(Entity.form(new Form()
+			.param("title", "My super title document 1")
+			.param("description", "My super description for document 1")
+			.param("subject", "Subject document 1")
+			.param("identifier", "Identifier document 1")
+			.param("publisher", "Publisher document 1")
+			.param("format", "Format document 1")
+			.param("source", "Source document 1")
+			.param("type", "Software")
+			.param("coverage", "Greenland")
+			.param("rights", "Public Domain")
+			.param("language", "eng")
+			.param("create_date", Long.toString(create1Date))), JsonObject.class);
+		String document1Id = json.getString("id");
+
+		json = target().path("/rate" + document1Id).request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+		.get(JsonObject.class);
+
+		JsonNumber percentage = json.getJsonNumber("percentage_rating");
+		Assert.assertEquals(percentage, 0.8);
+
 	}
 }
