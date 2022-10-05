@@ -154,7 +154,6 @@ public class RatingResource extends BaseResource {
 
 	@GET
 	@Path("{id: [a-z0-9\\-]+}")
-	// @Produces(MediaType.APPLICATION_JSON)
 	public Response percentRating(
 		@PathParam("id") String documentId
 	){
@@ -170,12 +169,13 @@ public class RatingResource extends BaseResource {
 		UserDao userDao = new UserDao();
 
 		if (document == null) {
-			System.out.println("not found");
 			throw new NotFoundException();
 		}
 
 		int numReviews = document.getNumReviews();
 		int totalActiveUsers = (int)userDao.getActiveUserCount();
+		System.out.println(numReviews);
+		System.out.println(totalActiveUsers);
 
 		float percentRating = (float) numReviews / totalActiveUsers;
 		response.add("percentage_rating", percentRating);

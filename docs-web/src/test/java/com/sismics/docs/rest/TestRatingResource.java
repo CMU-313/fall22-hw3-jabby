@@ -217,12 +217,37 @@ public class TestRatingResource extends BaseJerseyTest {
 			.param("create_date", Long.toString(create1Date))), JsonObject.class);
 		String document1Id = json.getString("id");
 
-		json = target().path("/rate" + document1Id).request()
+		// json = target().path("/rate/" + document1Id).request()
+		// .cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+		// .get(JsonObject.class);
+
+		// JsonNumber percentage = json.getJsonNumber("percentage_rating");
+		// Assert.assertEquals(percentage, 0.0);
+
+		// Login user7
+		clientUtil.createUser("user7");
+		String userToken7 = clientUtil.login("user7");
+
+		// call put request to save ratings for document 
+		json = target().path("/rate").request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken7)
+		.put(Entity.form(new Form()
+			.param("id", document1Id)
+			.param("tech_rating", "3")
+			.param("interpersonal_rating", "4")
+			.param("fit_rating", "1")), JsonObject.class);
+		String status = json.getString("status");
+
+		json = target().path("/rate/" + document1Id).request()
 		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
 		.get(JsonObject.class);
 
-		JsonNumber percentage = json.getJsonNumber("percentage_rating");
-		Assert.assertEquals(percentage, 0.8);
+		JsonNumber percentage1 = json.getJsonNumber("percentage_rating");
+		Assert.assertEquals(percentage1, 0.25);
+
+		Assert.assertEquals("ok", status);
+		// logout user7
+		clientUtil.logout(userToken7);
 
 	}
 }
