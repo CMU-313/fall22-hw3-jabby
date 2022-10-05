@@ -12,9 +12,9 @@
 :root {
     --rating-size: 10rem;
     --bar-size: 1rem;
-    --background-color: #e7f2fa;
+    --background-color: #f5fbff;
     --rating-color-default: #2980b9;
-    --rating-color-background: #c7e1f3;
+    --rating-color-background: #b3cbdd;
     --rating-color-nan: #000000;
     --rating-color-good: #27ae60;
     --rating-color-meh: #f1c40f;
