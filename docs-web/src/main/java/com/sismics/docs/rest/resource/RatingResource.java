@@ -160,7 +160,6 @@ public class RatingResource extends BaseResource {
 		Document document = documentDao.getById(documentId);
 
 		UserDao userDao = new UserDao();
-        // User user = userDao.getById(principal.getId());
 
 		if (document == null) {
 			throw new NotFoundException();
@@ -169,7 +168,7 @@ public class RatingResource extends BaseResource {
 		int numReviews = document.getNumReviews();
 		int totalActiveUsers = (int)userDao.getActiveUserCount();
 
-		float percentRating = numReviews / totalActiveUsers;
+		float percentRating = (float) numReviews / totalActiveUsers;
 		response.add("percentage_rating", percentRating);
 
 		return Response.ok().entity(response.build()).build();
