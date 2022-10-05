@@ -4,7 +4,7 @@ import com.sismics.docs.core.constant.PermType;
 import com.sismics.docs.core.dao.*;
 import com.sismics.docs.core.dao.dto.*;
 import com.sismics.docs.core.model.jpa.Document;
-
+import com.sismics.docs.core.model.jpa.User;
 import com.sismics.rest.exception.ForbiddenClientException;
 
 import javax.json.Json;
@@ -85,6 +85,93 @@ public class RatingResource extends BaseResource {
 		// return OK if successfully saved 
 		JsonObjectBuilder response = Json.createObjectBuilder()
 				.add("status", "ok");
+		return Response.ok().entity(response.build()).build();
+	}
+	@GET
+	public Response tech(
+		@FormParam("id") String documentId
+	){
+		if (!authenticate()) {
+			throw new ForbiddenClientException();
+		}
+		JsonObjectBuilder response = Json.createObjectBuilder();
+
+		DocumentDao documentDao = new DocumentDao();
+		Document document = documentDao.getById(documentId);
+
+		if (document == null) {
+			throw new NotFoundException();
+		}
+		String techRating = document.getAvgTech();
+
+		response.add("avg_tech_rating", techRating);
+		return Response.ok().entity(response.build()).build();
+	}	
+	@GET
+	public Response fit(
+		@FormParam("id") String documentId
+	){
+		if (!authenticate()) {
+			throw new ForbiddenClientException();
+		}
+		JsonObjectBuilder response = Json.createObjectBuilder();
+
+		DocumentDao documentDao = new DocumentDao();
+		Document document = documentDao.getById(documentId);
+
+		if (document == null) {
+			throw new NotFoundException();
+		}
+		String fitRating = document.getAvgFit();
+
+		response.add("avg_fit_rating", fitRating);
+		return Response.ok().entity(response.build()).build();
+	}	
+	@GET
+	public Response interpersonal(
+		@FormParam("id") String documentId
+	){
+		if (!authenticate()) {
+			throw new ForbiddenClientException();
+		}
+		JsonObjectBuilder response = Json.createObjectBuilder();
+
+		DocumentDao documentDao = new DocumentDao();
+		Document document = documentDao.getById(documentId);
+
+		if (document == null) {
+			throw new NotFoundException();
+		}
+		String interpersonalRating = document.getAvgInterpersonal();
+
+		response.add("avg_interpersonal_rating", interpersonalRating);
+		return Response.ok().entity(response.build()).build();
+	}
+	@GET
+	public Response percentRating(
+		@FormParam("id") String documentId
+	){
+		if (!authenticate()) {
+			throw new ForbiddenClientException();
+		}
+		JsonObjectBuilder response = Json.createObjectBuilder();
+
+		DocumentDao documentDao = new DocumentDao();
+		Document document = documentDao.getById(documentId);
+
+		UserDao userDao = new UserDao();
+        // User user = userDao.getById(principal.getId());
+
+		if (document == null) {
+			throw new NotFoundException();
+		}
+
+		int numReviews = document.getNumReviews();
+		int totalActiveUsers = (int)userDao.getActiveUserCount();
+
+		float percentRating = numReviews / totalActiveUsers;
+		response.add("percentage_rating", percentRating);
+
 		return Response.ok().entity(response.build()).build();
 	}
 }
