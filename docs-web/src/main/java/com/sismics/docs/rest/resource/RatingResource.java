@@ -88,76 +88,12 @@ public class RatingResource extends BaseResource {
 				.add("status", "ok");
 		return Response.ok().entity(response.build()).build();
 	}
-	// @GET
-	// @Path("{documentId: [a-z0-9\\-]+}")
-	// public Response tech(
-	// 	@PathParam("id") String documentId
-	// ){
-	// 	if (!authenticate()) {
-	// 		throw new ForbiddenClientException();
-	// 	}
-	// 	JsonObjectBuilder response = Json.createObjectBuilder();
-
-	// 	DocumentDao documentDao = new DocumentDao();
-	// 	Document document = documentDao.getById(documentId);
-
-	// 	if (document == null) {
-	// 		throw new NotFoundException();
-	// 	}
-	// 	String techRating = document.getAvgTech();
-
-	// 	response.add("avg_tech_rating", techRating);
-	// 	return Response.ok().entity(response.build()).build();
-	// }	
-	// @GET
-	// @Path("{documentId: [a-z0-9\\-]+}")
-	// public Response fit(
-	// 	@PathParam("id") String documentId
-	// ){
-	// 	if (!authenticate()) {
-	// 		throw new ForbiddenClientException();
-	// 	}
-	// 	JsonObjectBuilder response = Json.createObjectBuilder();
-
-	// 	DocumentDao documentDao = new DocumentDao();
-	// 	Document document = documentDao.getById(documentId);
-
-	// 	if (document == null) {
-	// 		throw new NotFoundException();
-	// 	}
-	// 	String fitRating = document.getAvgFit();
-
-	// 	response.add("avg_fit_rating", fitRating);
-	// 	return Response.ok().entity(response.build()).build();
-	// }	
-	// @GET
-	// @Path("{documentId: [a-z0-9\\-]+}")
-	// public Response interpersonal(
-	// 	@PathParam("id") String documentId
-	// ){
-	// 	if (!authenticate()) {
-	// 		throw new ForbiddenClientException();
-	// 	}
-	// 	JsonObjectBuilder response = Json.createObjectBuilder();
-
-	// 	DocumentDao documentDao = new DocumentDao();
-	// 	Document document = documentDao.getById(documentId);
-
-	// 	if (document == null) {
-	// 		throw new NotFoundException();
-	// 	}
-	// 	String interpersonalRating = document.getAvgInterpersonal();
-
-	// 	response.add("avg_interpersonal_rating", interpersonalRating);
-	// 	return Response.ok().entity(response.build()).build();
-	// }
 
 	@GET
 	@Path("{id: [a-z0-9\\-]+}")
 	public Response percentRating(
 		@PathParam("id") String documentId
 	){
-		System.out.println("rating GET APi");
 		if (!authenticate()) {
 			throw new ForbiddenClientException();
 		}
@@ -174,8 +110,6 @@ public class RatingResource extends BaseResource {
 
 		int numReviews = document.getNumReviews();
 		int totalActiveUsers = (int)userDao.getActiveUserCount();
-		System.out.println(numReviews);
-		System.out.println(totalActiveUsers);
 
 		float percentRating = (float) numReviews / totalActiveUsers;
 		response.add("percentage_rating", percentRating);

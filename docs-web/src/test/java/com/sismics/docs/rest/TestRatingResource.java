@@ -217,12 +217,12 @@ public class TestRatingResource extends BaseJerseyTest {
 			.param("create_date", Long.toString(create1Date))), JsonObject.class);
 		String document1Id = json.getString("id");
 
-		// json = target().path("/rate/" + document1Id).request()
-		// .cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
-		// .get(JsonObject.class);
+		json = target().path("/rate/" + document1Id).request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+		.get(JsonObject.class);
 
-		// JsonNumber percentage = json.getJsonNumber("percentage_rating");
-		// Assert.assertEquals(percentage, 0.0);
+		JsonNumber percentage = json.getJsonNumber("percentage_rating");
+		Assert.assertEquals(percentage.doubleValue(),0.0, 0);
 
 		// Login user7
 		clientUtil.createUser("user7");
@@ -243,8 +243,7 @@ public class TestRatingResource extends BaseJerseyTest {
 		.get(JsonObject.class);
 
 		JsonNumber percentage1 = json.getJsonNumber("percentage_rating");
-		Assert.assertEquals(percentage1, 0.25);
-
+		Assert.assertEquals(percentage1.doubleValue(),0.125, 0);
 		Assert.assertEquals("ok", status);
 		// logout user7
 		clientUtil.logout(userToken7);
