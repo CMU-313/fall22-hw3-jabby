@@ -67,13 +67,13 @@ public class RatingResource extends BaseResource {
 			document.setAvgFit(Float.toString(newAverageFit));
 
 			float newAverageTech = getRunningAverage(convertedTechRating, 
-			Float.parseFloat(document.getAvgTech()), 
-			previousReviews + 1);
+													Float.parseFloat(document.getAvgTech()), 
+													previousReviews + 1);
 			document.setAvgTech(Float.toString(newAverageTech));
 
 			float newAverageInterpersonal = getRunningAverage(convertedInterpersonalRating, 
-			Float.parseFloat(document.getAvgInterpersonal()), 
-			previousReviews + 1);
+													Float.parseFloat(document.getAvgInterpersonal()), 
+													previousReviews + 1);
 			document.setAvgInterpersonal(Float.toString(newAverageInterpersonal));
 
 			// assume that logged in user is the one rating the document

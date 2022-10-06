@@ -77,7 +77,7 @@ public class TestRatingResource extends BaseJerseyTest {
 		Assert.assertEquals("2.0", json.getString("tech_rating"));
 		Assert.assertEquals("1.0", json.getString("interpersonal_rating"));
 		Assert.assertEquals("3.0", json.getString("fit_rating"));
-		Assert.assertEquals("1", json.getString("num_reviews"));
+		Assert.assertEquals(1, json.getInt("num_reviews"));
 	}
 
 	/**
@@ -161,14 +161,14 @@ public class TestRatingResource extends BaseJerseyTest {
 		userToken1 = clientUtil.login("user1");
 		// Get document 1
 		json = target().path("/document/" + document1Id).request()
-		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken1)
-		.get(JsonObject.class);
+					   .cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken1)
+					   .get(JsonObject.class);
 
 		// tech rating average = (2 + 3 + 2) / 3 = 2.33
 		// interpersonal rating average = (1 + 4 + 3) / 3 = 2.667
 		// fit rating average = (2 + 1 + 3) / 3 = 2.0
 
-		Assert.assertEquals("3", json.getString("num_reviews"));
+		Assert.assertEquals(3, json.getInt("num_reviews"));
 		Assert.assertTrue(Float.parseFloat(json.getString("tech_rating")) == (float)(2 + 3 + 2) / 3);
 		Assert.assertTrue(Float.parseFloat(json.getString("interpersonal_rating")) == (float)(1 + 4 + 3) / 3);
 		Assert.assertTrue(Float.parseFloat(json.getString("fit_rating")) == (float)(2 + 1 + 3) / 3);
