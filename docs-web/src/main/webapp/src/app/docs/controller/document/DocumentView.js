@@ -158,7 +158,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   };
 
   /**
-   * Display a Rate.
+   * Display the Rate.
    */
   $scope.showRate = function (rate) {
     // Show the link
