@@ -15,6 +15,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javax.json.JsonArray;
+import javax.json.JsonNumber;
 import javax.json.JsonObject;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.client.Entity;
@@ -190,5 +191,62 @@ public class TestRatingResource extends BaseJerseyTest {
 		} catch (NotFoundException e) {
 
 		}
+	}
+
+	@Test
+	public void testPercentRating() throws Exception {
+		clientUtil.createUser("user6");
+        String userToken6 = clientUtil.login("user6");
+
+        // Create a document with document1
+		long create1Date = new Date().getTime();
+		JsonObject json = target().path("/document").request()
+			.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+			.put(Entity.form(new Form()
+			.param("title", "My super title document 1")
+			.param("description", "My super description for document 1")
+			.param("subject", "Subject document 1")
+			.param("identifier", "Identifier document 1")
+			.param("publisher", "Publisher document 1")
+			.param("format", "Format document 1")
+			.param("source", "Source document 1")
+			.param("type", "Software")
+			.param("coverage", "Greenland")
+			.param("rights", "Public Domain")
+			.param("language", "eng")
+			.param("create_date", Long.toString(create1Date))), JsonObject.class);
+		String document1Id = json.getString("id");
+
+		json = target().path("/rate/" + document1Id).request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+		.get(JsonObject.class);
+
+		JsonNumber percentage = json.getJsonNumber("percentage_rating");
+		Assert.assertEquals(percentage.doubleValue(),0.0, 0);
+
+		// Login user7
+		clientUtil.createUser("user7");
+		String userToken7 = clientUtil.login("user7");
+
+		// call put request to save ratings for document 
+		json = target().path("/rate").request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken7)
+		.put(Entity.form(new Form()
+			.param("id", document1Id)
+			.param("tech_rating", "3")
+			.param("interpersonal_rating", "4")
+			.param("fit_rating", "1")), JsonObject.class);
+		String status = json.getString("status");
+
+		json = target().path("/rate/" + document1Id).request()
+		.cookie(TokenBasedSecurityFilter.COOKIE_NAME, userToken6)
+		.get(JsonObject.class);
+
+		JsonNumber percentage1 = json.getJsonNumber("percentage_rating");
+		Assert.assertEquals(percentage1.doubleValue(),0.125, 0);
+		Assert.assertEquals("ok", status);
+		// logout user7
+		clientUtil.logout(userToken7);
+
 	}
 }
