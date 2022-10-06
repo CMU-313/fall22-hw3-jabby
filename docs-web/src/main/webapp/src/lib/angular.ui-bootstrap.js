@@ -341,7 +341,7 @@ angular.module('ui.bootstrap.buttons', [])
     toggleEvent: 'click'
   })
 
-  .controller('UibButtonsController', ['uibButtonConfig', function(buttonConfig) {
+  .controller('UibButtons oller', ['uibButtonConfig', function(buttonConfig) {
     this.activeClass = buttonConfig.activeClass || 'active';
     this.toggleEvent = buttonConfig.toggleEvent || 'click';
   }])

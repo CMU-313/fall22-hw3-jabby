@@ -199,7 +199,9 @@
     },
     "rate": {
       "title": "Rate user",
-      "message": "rate the user",
+      "message1": "Rating based on Technical Skills",
+      "message2": "Rating based on Interpersonal Skills ",
+      "message3": "How fit is the user",
       "submit": "Rate"
     }
   },

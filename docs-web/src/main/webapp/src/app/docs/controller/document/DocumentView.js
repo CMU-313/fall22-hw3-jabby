@@ -130,6 +130,61 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
     });
   };
 
+
+
+  /**
+   * Open the Rate dialog.
+   */
+   $scope.rate = function () {
+    $uibModal.open({
+      templateUrl: 'partial/docs/document.rate.html',
+      controller: 'DocumentModalRate'
+    }).result.then(function (name) {
+          if (name === null) {
+            return;
+          }
+
+          // Rate the document
+          Restangular.one('rate').put({
+            name: name,
+            id: $stateParams.id
+          }).then(function (acl) {
+                // Display the new share ACL and add it to the local ACLs
+                $scope.showRate(acl);
+                $scope.document.acls.push(acl);
+                $scope.document.acls = angular.copy($scope.document.acls);
+              })
+        });
+  };
+
+  /**
+   * Display a Rate.
+   */
+  $scope.showRate = function (rate) {
+    // Show the link
+    var link = $location.absUrl().replace($location.path(), '').replace('#', '') + 'rate.html#/rate/' + $stateParams.id + '/' + share.id;
+    var title = $translate.instant('document.view.shared_document_title');
+    var msg = $translate.instant('document.view.shared_document_message', { link: link });
+    var btns = [
+      {result: 'close', label: $translate.instant('close')}
+    ];
+
+    if ($rootScope.userInfo.username !== 'guest') {
+      btns.unshift({result: 'unrate', label: $translate.instant('unrate'), cssClass: 'btn-danger'});
+    }
+
+    $dialog.messageBox(title, msg, btns, function (result) {
+      if (result === 'unshare') {
+        // Unshare this document and update the local shares
+        Restangular.one('rate', rate.id).remove().then(function () {
+          $scope.document.acls = _.reject($scope.document.acls, function (s) {
+            return rate.id === r.id;
+          });
+        });
+      }
+    });
+  };
+
   /**
    * Export the current document to PDF.
    */
