@@ -207,6 +207,10 @@ public class DocumentResource extends BaseResource {
         document.add("coverage", JsonUtil.nullable(documentDto.getCoverage()));
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
+        document.add("num_reviews", Integer.toString(documentDto.getNumReviews()));
+        document.add("tech_rating", documentDto.getAvgTech());
+        document.add("interpersonal_rating", documentDto.getAvgInterpersonal());
+        document.add("fit_rating", documentDto.getAvgFit());
 
         // Add ACL
         AclUtil.addAcls(document, documentId, getTargetIdList(shareId));
@@ -770,6 +774,11 @@ public class DocumentResource extends BaseResource {
         document.setCoverage(coverage);
         document.setRights(rights);
         document.setLanguage(language);
+        document.setAvgFit("0.0");
+        document.setAvgInterpersonal("0.0");
+        document.setAvgTech("0.0");
+        document.setNumReviews(0);
+
         if (createDate == null) {
             document.setCreateDate(new Date());
         } else {
@@ -1000,6 +1009,11 @@ public class DocumentResource extends BaseResource {
         document.setFormat("EML");
         document.setSource("Email");
         document.setLanguage(ConfigUtil.getConfigStringValue(ConfigType.DEFAULT_LANGUAGE));
+        document.setAvgFit("0.0");
+        document.setAvgInterpersonal("0.0");
+        document.setAvgTech("0.0");
+        document.setNumReviews(0);
+
         if (mailContent.getDate() == null) {
             document.setCreateDate(new Date());
         } else {
