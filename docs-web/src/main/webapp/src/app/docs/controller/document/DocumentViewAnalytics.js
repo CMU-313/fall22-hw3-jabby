@@ -56,8 +56,12 @@
      * Get percentage of reviews and average ratings from server
      */
     $scope.loadReviews = function () {
+        Restangular.one('rate', $stateParams.id).get().then(function (data) {
+            $scope.num_reviews = data.percentage_rating; 
+        });
+        
         Restangular.one('document', $stateParams.id).get().then(function (data) {
-            $scope.ratings = [data.num_reviews, data.tech_rating, data.interpersonal_rating, data.fit_rating];
+            $scope.ratings = [$scope.num_reviews, data.tech_rating, data.interpersonal_rating, data.fit_rating];
             // $scope.ratings = [4/7 * 100, 8.8, 2.0, 0.0]; // purely for testing
             $scope.styleReviews();
         }, function (response) {
