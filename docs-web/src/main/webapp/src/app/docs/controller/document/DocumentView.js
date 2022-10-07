@@ -139,15 +139,16 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
     $uibModal.open({
       templateUrl: 'partial/docs/document.rate.html',
       controller: 'DocumentModalRate'
-    }).result.then(function (name) {
-          if (name === null) {
-            return;
+    }).result.then(function (ratings) {
+          if(ratings[0] == null || ratings[1] == null || ratings[2] == null) {
+            return
           }
-
           // Rate the document
           Restangular.one('rate').put({
-            name: name,
-            id: $stateParams.id
+            id: $stateParams.id,
+            tech_rating: ratings[0],
+            interpersonal_rating: ratings[1],
+            fit_rating: ratings[2]
           }).then(function (acl) {
                 // Display the new share ACL and add it to the local ACLs
                 $scope.showRate(acl);
@@ -160,9 +161,11 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   /**
    * Display the Rate.
    */
+  /*
   $scope.showRate = function (rate) {
+    console.log("showRate called")
     // Show the link
-    var link = $location.absUrl().replace($location.path(), '').replace('#', '') + 'rate.html#/rate/' + $stateParams.id + '/' + share.id;
+    var link = $location.absUrl().replace($location.path(), '').replace('#', '') + 'rate.html#/rate/' + $stateParams.id + '/' + rate.id;
     var title = $translate.instant('document.view.shared_document_title');
     var msg = $translate.instant('document.view.shared_document_message', { link: link });
     var btns = [
@@ -184,7 +187,7 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
       }
     });
   };
-
+  */
   /**
    * Export the current document to PDF.
    */
