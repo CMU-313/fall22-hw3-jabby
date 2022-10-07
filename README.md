@@ -10,6 +10,49 @@ Teedy is an open source, lightweight document management system for individuals 
 
 ![New!](https://teedy.io/img/laptop-demo.png?20180301)
 
+# New Feature: Admission Document Ratings and Analytics Dashboard 
+
+In order to get Teedy installed and running: 
+
+Clone the repository to your local machine (`git clone https://github.com/CMU-313/Teedy`) and then use Maven to build Teedy from source by running the following command from the root directory:
+
+```console
+mvn clean -DskipTests install
+```
+
+After successfully building Teedy from source, you can launch a Teedy instance by running the following commands from the root directory:
+
+```console
+cd docs-web
+mvn jetty:run
+```
+
+Navigate to ```http://localhost:8080/src``` or ```http://localhost:8080/``` and you should see Teedy running. 
+
+To log in, use admin as both the username and pass word 
+
+Our feature has 2 major changes, the ability to rate a document (candidate) on three criteria: technical skills, interpersonal skills, and overall fit. 
+
+These can be applied to a document after it is created by clicking on the rate button. 
+
+First, create a new document. Then, click on the rate button found next to the share button: 
+
+
+This will open up a form where the 3 ratings can be given on a scale of 1-10:
+
+
+After clicking submit, navigate to the analytics tab. This will open up a dashboard showing the average ratings given for this candidate across all users logged in to the Teedy system: 
+
+
+In order to demonstrate averaging across multiple users. Navigate to the Settings page and click Users. Add a new user. Then, revisit the document first created and go to the Permissions tab. Give the user you created read and **write** permissions. Now, log in as that new user and rate the document. 
+
+You should see that the ratings were averaged accross the two users:
+
+
+The number of reviewers is a work in progress. We determined that it was not a core functionality of our feature so it will be tackled and iterated upon in  a future sprint. 
+
+Tests for our feature are written in the TestRatingResource.java file. These can be run using ```mvn test``` (to run the full test suite) or ```mvn -Dtest=TestRatingResource test``` (to run just the rating feature tests)
+
 # Features
 
 - Responsive user interface
