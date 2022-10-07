@@ -49,15 +49,21 @@ After clicking rate, navigate to the analytics tab:
 
 This will open up a dashboard showing the average ratings given for this candidate across all users logged in to the Teedy system: 
 
-![dashboard_one_review](https://user-images.githubusercontent.com/56098501/194445340-94dd095b-ac53-4f42-9cc5-c1d2bb745588.png)
+![Screen Shot 2022-10-06 at 10 11 53 PM](https://user-images.githubusercontent.com/56098501/194452101-98fa82d6-cb9d-43c4-98a5-7d4e220f44a7.png)
 
-In order to demonstrate averaging across multiple users. Navigate to the Settings page and click Users. Add a new user. Then, revisit the document first created and go to the Permissions tab. Give the user you created read and **write** permissions. Now, log in as that new user and rate the document. 
+You can see just the ratings given by the admin user. Since the guest user is also in the system, the percentage of reviews completed is 50% (Taken out of all users logged into the system). In a future sprint, this could be modified to allow for assigning reviews to specific users.
 
-You should see that the ratings were averaged accross the two users:
+In order to demonstrate averaging across multiple users. Navigate to the Settings page and click Users. Add a new user. Then, revisit the document first created and go to the Permissions tab. Give the user you created read and **write** permissions. 
 
-![dashboard_two_reviews](https://user-images.githubusercontent.com/56098501/194445387-fd0d1a4a-29bc-4cd6-9a5c-d5efc063f780.png)
+You should now see that the percentage of reviews decreased: 
 
-The number of reviewers is a work in progress. We determined that it was not a core functionality of our feature so it will be tackled and iterated upon in  a future sprint. 
+![Screen Shot 2022-10-06 at 10 12 39 PM](https://user-images.githubusercontent.com/56098501/194452177-6bae0045-a962-4426-811e-e60da8f20ca4.png)
+
+Now, log in as that new user and rate the document. 
+
+You should see that the ratings were averaged across the two users:
+
+![Screen Shot 2022-10-06 at 10 13 24 PM](https://user-images.githubusercontent.com/56098501/194452264-c0b87f98-dea4-45e7-964e-12156a0c7f90.png)
 
 Tests for our feature are written in the TestRatingResource.java file. These can be run using ```mvn test``` (to run the full test suite) or ```mvn -Dtest=TestRatingResource test``` (to run just the rating feature tests)
 
