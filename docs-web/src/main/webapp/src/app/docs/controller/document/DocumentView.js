@@ -130,8 +130,6 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
     });
   };
 
-
-
   /**
    * Open the Rate dialog.
    */
@@ -158,36 +156,6 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
         });
   };
 
-  /**
-   * Display the Rate.
-   */
-  /*
-  $scope.showRate = function (rate) {
-    console.log("showRate called")
-    // Show the link
-    var link = $location.absUrl().replace($location.path(), '').replace('#', '') + 'rate.html#/rate/' + $stateParams.id + '/' + rate.id;
-    var title = $translate.instant('document.view.shared_document_title');
-    var msg = $translate.instant('document.view.shared_document_message', { link: link });
-    var btns = [
-      {result: 'close', label: $translate.instant('close')}
-    ];
-
-    if ($rootScope.userInfo.username !== 'guest') {
-      btns.unshift({result: 'unrate', label: $translate.instant('unrate'), cssClass: 'btn-danger'});
-    }
-
-    $dialog.messageBox(title, msg, btns, function (result) {
-      if (result === 'unshare') {
-        // Unshare this document and update the local shares
-        Restangular.one('rate', rate.id).remove().then(function () {
-          $scope.document.acls = _.reject($scope.document.acls, function (s) {
-            return rate.id === r.id;
-          });
-        });
-      }
-    });
-  };
-  */
   /**
    * Export the current document to PDF.
    */
