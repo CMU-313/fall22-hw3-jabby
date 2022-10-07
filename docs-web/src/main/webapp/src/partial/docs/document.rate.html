@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3>{{ 'document.rate.title' | translate }}</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      <div>
+        <label for="tech_rating">{{ 'document.rate.message1' | translate }}</label>
+        <br/>
+        <input type="number" min="1" max="10" id="tech_rating" ng-model="tech_rating" />
+      </div>
+      <div>
+        <label for="interpersonal_rating">{{ 'document.rate.message2' | translate }}</label>
+        <br/>
+        <input type="number" min="1" max="10" id="interpersonal_rating" ng-model="interpersonal_rating" />
+      </div>
+      <div>
+        <label for="fit_rating">{{ 'document.rate.message3' | translate }}</label>
+        <br/>
+        <input type="number" min="1" max="10" id="fit_rating" ng-model="fit_rating" />
+      </div>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button ng-click="close(tech_rating, interpersonal_rating, fit_rating)" class="btn btn-primary">
+      <span class="fas fa-rate"></span> {{ 'document.rate.submit' | translate }}
+    </button>
+    <button ng-click="close(null, null, null)" class="btn btn-default">{{ 'cancel' | translate }}</button>
+  </div>

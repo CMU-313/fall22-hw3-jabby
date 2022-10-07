@@ -44,7 +44,7 @@ public class RatingResource extends BaseResource {
 		if (!authenticate()) {
 			throw new ForbiddenClientException();
 		}
-
+		
 		DocumentDao documentDao = new DocumentDao();
 		// targetId list not necessary 
 		Document document = documentDao.getById(documentId);

@@ -131,6 +131,32 @@ angular.module('docs').controller('DocumentView', function ($scope, $rootScope, 
   };
 
   /**
+   * Open the Rate dialog.
+   */
+   $scope.rate = function () {
+    $uibModal.open({
+      templateUrl: 'partial/docs/document.rate.html',
+      controller: 'DocumentModalRate'
+    }).result.then(function (ratings) {
+          if(ratings[0] == null || ratings[1] == null || ratings[2] == null) {
+            return
+          }
+          // Rate the document
+          Restangular.one('rate').put({
+            id: $stateParams.id,
+            tech_rating: ratings[0],
+            interpersonal_rating: ratings[1],
+            fit_rating: ratings[2]
+          }).then(function (acl) {
+                // Display the new share ACL and add it to the local ACLs
+                $scope.showRate(acl);
+                $scope.document.acls.push(acl);
+                $scope.document.acls = angular.copy($scope.document.acls);
+              })
+        });
+  };
+
+  /**
    * Export the current document to PDF.
    */
   $scope.exportPdf = function () {
