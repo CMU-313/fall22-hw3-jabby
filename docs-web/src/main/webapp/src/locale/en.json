@@ -152,8 +152,11 @@
       "analytics": {
         "analytics": "Analytics",
         "message": "Summary of reviewers' scores are listed here.",
-        "no_reviewers": "Number of Reviewers",
-        "avg_scores": "Scores by Category"
+        "pct_reviews": "Percentage of Reviews Completed",
+        "avg_scores": "Average Reviewer Scores by Category",
+        "technical_label": "Technical Skills",
+        "interpersonal_label": "Interpersonal Skills",
+        "overall_label": "Overall Fit"
       }
     },
     "edit": {

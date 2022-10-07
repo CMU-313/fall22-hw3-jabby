@@ -207,7 +207,7 @@ public class DocumentResource extends BaseResource {
         document.add("coverage", JsonUtil.nullable(documentDto.getCoverage()));
         document.add("rights", JsonUtil.nullable(documentDto.getRights()));
         document.add("creator", documentDto.getCreator());
-        document.add("num_reviews", Integer.toString(documentDto.getNumReviews()));
+        document.add("num_reviews", documentDto.getNumReviews());
         document.add("tech_rating", documentDto.getAvgTech());
         document.add("interpersonal_rating", documentDto.getAvgInterpersonal());
         document.add("fit_rating", documentDto.getAvgFit());

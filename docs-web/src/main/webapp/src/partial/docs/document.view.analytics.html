@@ -2,10 +2,22 @@
 
 <div class="well">
     
-    <h3>{{ 'document.view.analytics.no_reviewers' | translate }}</h3>
-    <p> 3 reviewers </p>
+    <h3>{{ 'document.view.analytics.pct_reviews' | translate }}</h3>
+    <div>
+        <div class="col-md-12 flex-container"><div class="rating"> </div></div>
+    </div>
 
     <h3>{{ 'document.view.analytics.avg_scores' | translate }}</h3>
-    <p> 80, 90, 100 </p>
+    <div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+        <div class="col-md-4 flex-container"><div class="rating"> </div></div>
+
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.technical_label' | translate }}</h4>
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.interpersonal_label' | translate }}</h4>
+        <h4 class="col-md-4 text-center">{{ 'document.view.analytics.overall_label' | translate }}</h4>
+    </div>
+
+    <p>&nbsp</p> <!-- empty space purely to set outer <div> size -->
 
 </div>
