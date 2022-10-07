@@ -243,7 +243,7 @@ public class TestRatingResource extends BaseJerseyTest {
 		.get(JsonObject.class);
 
 		JsonNumber percentage1 = json.getJsonNumber("percentage_rating");
-		Assert.assertEquals(percentage1.doubleValue(),0.125, 0);
+		Assert.assertEquals(percentage1.doubleValue(),12.5, 0);
 		Assert.assertEquals("ok", status);
 		// logout user7
 		clientUtil.logout(userToken7);

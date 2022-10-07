@@ -111,7 +111,7 @@ public class RatingResource extends BaseResource {
 		int numReviews = document.getNumReviews();
 		int totalActiveUsers = (int)userDao.getActiveUserCount();
 
-		float percentRating = (float) numReviews / totalActiveUsers;
+		float percentRating = (float) numReviews / totalActiveUsers * 100;
 		response.add("percentage_rating", percentRating);
 
 		return Response.ok().entity(response.build()).build();
