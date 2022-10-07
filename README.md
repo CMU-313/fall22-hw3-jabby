@@ -29,7 +29,7 @@ mvn jetty:run
 
 Navigate to ```http://localhost:8080/src``` or ```http://localhost:8080/``` and you should see Teedy running. 
 
-To log in, use admin as both the username and pass word 
+To log in, use admin as both the username and password 
 
 Our feature has 2 major changes, the ability to rate a document (candidate) on three criteria: technical skills, interpersonal skills, and overall fit. 
 
@@ -37,17 +37,25 @@ These can be applied to a document after it is created by clicking on the rate b
 
 First, create a new document. Then, click on the rate button found next to the share button: 
 
+![rate_button](https://user-images.githubusercontent.com/56098501/194445324-f7d3a10f-24f9-427d-83e2-591f039e8219.png)
 
 This will open up a form where the 3 ratings can be given on a scale of 1-10:
 
+![form](https://user-images.githubusercontent.com/56098501/194445334-1166ca2f-fe3e-40c0-81a8-5b522f4a613c.png)
 
-After clicking submit, navigate to the analytics tab. This will open up a dashboard showing the average ratings given for this candidate across all users logged in to the Teedy system: 
+After clicking rate, navigate to the analytics tab:
 
+![analytics_tab](https://user-images.githubusercontent.com/56098501/194445368-fb8f630a-d058-4467-a07e-1c97adb0eb42.png)
+
+This will open up a dashboard showing the average ratings given for this candidate across all users logged in to the Teedy system: 
+
+![dashboard_one_review](https://user-images.githubusercontent.com/56098501/194445340-94dd095b-ac53-4f42-9cc5-c1d2bb745588.png)
 
 In order to demonstrate averaging across multiple users. Navigate to the Settings page and click Users. Add a new user. Then, revisit the document first created and go to the Permissions tab. Give the user you created read and **write** permissions. Now, log in as that new user and rate the document. 
 
 You should see that the ratings were averaged accross the two users:
 
+![dashboard_two_reviews](https://user-images.githubusercontent.com/56098501/194445387-fd0d1a4a-29bc-4cd6-9a5c-d5efc063f780.png)
 
 The number of reviewers is a work in progress. We determined that it was not a core functionality of our feature so it will be tackled and iterated upon in  a future sprint. 
 
